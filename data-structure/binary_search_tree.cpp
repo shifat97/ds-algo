@@ -94,6 +94,21 @@ void insert(Node *&root, int val)
     }
 }
 
+// Sorted array to BST
+Node *sortedArrayToBST(vector<int> &nums, int start, int end)
+{
+    if (start > end)
+        return NULL;
+
+    int mid = start + (end - start) / 2;
+    Node *root = new Node(nums[mid]);
+
+    root->left = sortedArrayToBST(nums, start, mid - 1);
+    root->right = sortedArrayToBST(nums, mid + 1, end);
+
+    return root;
+}
+
 void print(Node *root)
 {
     queue<Node *> q;
@@ -126,5 +141,13 @@ int main()
 
     insert(root, val);
     print(root);
+
+    // int n;
+    // cin >> n;
+    // vector<int> a(n);
+    // for (int i = 0; i < n; i++)
+    //     cin >> a[i];
+    // Node *root = sortedArrayToBST(a, 0, n - 1);
+    // print(root);
     return 0;
 }
